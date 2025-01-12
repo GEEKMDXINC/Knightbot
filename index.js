@@ -462,7 +462,7 @@ const sock = makeWASocket({
     });
 }
 
- startbot();
+ startbot()
  
 app.get("/", (req, res) => {
 res.send("hey, bot started✅");
