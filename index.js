@@ -118,7 +118,7 @@ const port = process.env.PORT || 8000;
 
 //=============================================
 
-async function startbot() {
+async function main() {
 console.log("Connecting WhatsApp bot 🧬...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + './data')
 var { version } = await fetchLatestBaileysVersion()
@@ -462,7 +462,7 @@ const sock = makeWASocket({
     });
 }
 
- startbot()
+ main()
  
 app.get("/", (req, res) => {
 res.send("hey, bot started✅");
