@@ -1,4 +1,5 @@
 const settings = require('./settings');
+const config = require('./config');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
@@ -103,11 +104,11 @@ function decodeBase64(base64String) {
 
 
 
-if (!fs.existsSync(__dirname + './auth_info/creds.json')) {
+if (!fs.existsSync(__dirname + '/auth_info/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
 const session = config.SESSION_ID
 const decodedSession = decodeBase64(session);
-fs.writeFileSync(__dirname + './auth_info/creds.json', decodedSession, 'utf8');
+fs.writeFileSync(__dirname + '/auth_info/creds.json', decodedSession, 'utf8');
 console.log("Session saved ✅")
 }
 
