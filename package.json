@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "pm2 start index.js --deep-monitoring --attach --name wabot",
+    "stop": "pm2 stop wabot",
+    "restart": "pm2 restart wabot"
   },
   "keywords": [
     "bot",
@@ -41,6 +43,7 @@
     "link-preview-js": "^3.0.5",
     "megajs": "^1.1.0",
     "phin": "^3.7.1",
+    "pm2": "^5.2.0",
     "qrcode": "^1.5.4",
     "qrcode-terminal": "^0.12.0",
     "request": "^2.88.2",
