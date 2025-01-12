@@ -462,10 +462,16 @@ const sock = makeWASocket({
     });
 }
 
-// Start the bot
-  startBot();
+
 
 app.get("/", (req, res) => {
 res.send("hey, bot started✅");
 });
 app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
+
+
+
+// Start the bot
+
+  startBot();
+
