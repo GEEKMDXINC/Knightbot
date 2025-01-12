@@ -96,13 +96,44 @@ async function sendGlobalBroadcastMessage(sock) {
 }
 
 // Function to start the bot
-async function startBot() {
-    const { state, saveCreds } = await useMultiFileAuthState('./auth_info');
-    const sock = makeWASocket({
-        auth: state,
-        printQRInTerminal: true,
-        logger: P({ level: 'warn' })
-    });
+function decodeBase64(base64String) {
+    return Buffer.from(base64String, 'base64').toString('utf8');
+}
+
+
+
+if (!fs.existsSync(__dirname + './auth_info/creds.json')) {
+if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
+const session = config.SESSION_ID
+const decodedSession = decodeBase64(session);
+fs.writeFileSync(__dirname + './auth_info/creds.json', decodedSession, 'utf8');
+console.log("Session saved ✅")
+}
+
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 8000;
+
+//=============================================
+
+async function startbot() {
+console.log("Connecting WhatsApp bot 🧬...");
+const { state, saveCreds } = await useMultiFileAuthState(__dirname + './auth_info')
+var { version } = await fetchLatestBaileysVersion()
+const store = makeInMemoryStore({ logger: P().child({ level: "silent", stream: "store"
+  })
+});
+const sock = makeWASocket({
+    logger: P({ level: 'silent' }),
+        printQRInTerminal: false,
+        browser: [ "Ubuntu", "Chrome", "20.0.04" ],
+        syncFullHistory: true,
+        generateHighQualityLinkPreview: true,
+        auth: {
+            creds: state.creds,
+            keys: makeCacheableSignalKeyStore(state.keys, P({ level: "fatal" }).child({ level: "fatal" }))
+        },
+        
 
     sock.ev.on('creds.update', saveCreds);
 
@@ -431,3 +462,8 @@ async function startBot() {
 
 // Start the bot
 startBot();
+
+app.get("/", (req, res) => {
+res.send("hey, bot started✅");
+});
+app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
