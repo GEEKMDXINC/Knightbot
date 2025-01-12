@@ -104,11 +104,11 @@ function decodeBase64(base64String) {
 
 
 
-if (!fs.existsSync(__dirname + '/auth_info/creds.json')) {
+if (!fs.existsSync(__dirname + '/data/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
 const session = config.SESSION_ID
 const decodedSession = decodeBase64(session);
-fs.writeFileSync(__dirname + '/auth_info/creds.json', decodedSession, 'utf8');
+fs.writeFileSync(__dirname + '/data/creds.json', decodedSession, 'utf8');
 console.log("Session saved ✅")
 }
 
@@ -120,7 +120,7 @@ const port = process.env.PORT || 8000;
 
 async function startbot() {
 console.log("Connecting WhatsApp bot 🧬...");
-const { state, saveCreds } = await useMultiFileAuthState(__dirname + './auth_info')
+const { state, saveCreds } = await useMultiFileAuthState(__dirname + './data')
 var { version } = await fetchLatestBaileysVersion()
 const store = makeInMemoryStore({ logger: P().child({ level: "silent", stream: "store"
   })
@@ -463,7 +463,7 @@ const sock = makeWASocket({
 }
 
 // Start the bot
-startBot();
+  startBot();
 
 app.get("/", (req, res) => {
 res.send("hey, bot started✅");
