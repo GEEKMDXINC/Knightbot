@@ -52,6 +52,7 @@ const { truthCommand } = require('./commands/truth');
 const { clearCommand } = require('./commands/clear');
 
 // Data storage path
+const { File } = require('megajs')
 const dataDirectory = path.join(__dirname, './data');
 const dataFile = path.join(dataDirectory, 'userGroupData.json');
 
