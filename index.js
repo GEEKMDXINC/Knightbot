@@ -462,13 +462,10 @@ const sock = makeWASocket({
     });
 }
 
- main()
- 
-app.get("/", (req, res) => {
-res.send("hey, bot started✅");
+ app.get("/", (req, res) => {
+res.send("HEY, SOBIA MD BOT WILL BE STARTED ✅");
 });
-app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
-
-
-
-
+app.listen(port, () => console.log(`Um4d Server listening on port http://localhost:${port}`));
+setTimeout(() => {
+main()
+}, 4000);
