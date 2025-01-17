@@ -118,7 +118,7 @@ const port = process.env.PORT || 8000;
 
 //=============================================
 
-async function main() {
+async function startBot() {
 console.log("Connecting WhatsApp bot 🧬...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + './data')
 var { version } = await fetchLatestBaileysVersion()
@@ -467,5 +467,5 @@ res.send("HEY, SOBIA MD BOT WILL BE STARTED ✅");
 });
 app.listen(port, () => console.log(`Um4d Server listening on port http://localhost:${port}`));
 setTimeout(() => {
-main()
+startBot()
 }, 4000);
